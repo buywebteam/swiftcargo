@@ -13,7 +13,11 @@ function Hero() {
             We Handle Transport and Logistics, So You Can Focus on Your Business
           </p>
           <div className="flex justify-center md:justify-start">
-            <Button label="Track Shipment" />
+            <a
+              href="https://wa.me/1234567890" // Replace with your WhatsApp number
+            >
+              <Button label="Track Shipment" />
+            </a>
           </div>
         </div>
 

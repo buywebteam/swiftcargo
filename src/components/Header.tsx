@@ -1,21 +1,31 @@
 import { useState } from "react";
 import { FiMenu, FiX } from "react-icons/fi";
-import { NavLink } from "react-router-dom";
 
 const Navbar = () => {
   const [isOpen, setIsOpen] = useState(false);
+  const [activeLink, setActiveLink] = useState(""); // State to track active link
+
   const toggleMenu = () => setIsOpen(!isOpen);
 
-  const linkClass = ({ isActive }: { isActive: boolean }) =>
-    `hover:underline ${isActive ? "text-yellow-400 font-semibold" : ""}`;
+  const linkClass = (id: string) =>
+    `hover:underline ${
+      activeLink === id ? "text-yellow-400 font-semibold" : ""
+    }`;
+
+  // Function to handle smooth scroll
+  const scrollToSection = (id: string) => {
+    const element = document.getElementById(id);
+    if (element) {
+      element.scrollIntoView({ behavior: "smooth" });
+      setActiveLink(id); // Set active link when clicked
+    }
+  };
 
   return (
-    <nav className="bg-black text-white sticky top-0 z-99 p-5">
+    <nav className="bg-black text-white sticky top-0 z-50 p-5">
       <div className="max-w-7xl mx-auto">
         <div className="flex justify-between items-center">
-          <NavLink to="/" className="text-xl font-bold">
-            Swiftcargo
-          </NavLink>
+          <div className="text-xl font-bold">Swiftcargo</div>
 
           <div className="md:hidden">
             <button onClick={toggleMenu} className="focus:outline-none">
@@ -25,53 +35,110 @@ const Navbar = () => {
 
           <ul className="hidden md:flex space-x-6 text-base">
             <li>
-              <NavLink to="/home" className={linkClass}>
+              <a
+                href="#home"
+                onClick={(e) => {
+                  e.preventDefault();
+                  scrollToSection("home");
+                }}
+                className={linkClass("home")}
+              >
                 Home
-              </NavLink>
+              </a>
             </li>
             <li>
-              <NavLink to="/about" className={linkClass}>
+              <a
+                href="#about"
+                onClick={(e) => {
+                  e.preventDefault();
+                  scrollToSection("about");
+                }}
+                className={linkClass("about")}
+              >
                 About
-              </NavLink>
+              </a>
             </li>
             <li>
-              <NavLink to="/services" className={linkClass}>
+              <a
+                href="#services"
+                onClick={(e) => {
+                  e.preventDefault();
+                  scrollToSection("services");
+                }}
+                className={linkClass("services")}
+              >
                 Services
-              </NavLink>
+              </a>
             </li>
             <li>
-              <NavLink to="/contact" className={linkClass}>
+              <a
+                href="#contact"
+                onClick={(e) => {
+                  e.preventDefault();
+                  scrollToSection("contact");
+                }}
+                className={linkClass("contact")}
+              >
                 Contact
-              </NavLink>
+              </a>
             </li>
           </ul>
         </div>
 
+        {/* Mobile Menu */}
         <div className={`${isOpen ? "block" : "hidden"} md:hidden mt-4`}>
           <ul className="flex flex-col space-y-4 text-base">
             <li>
-              <NavLink to="/home" className={linkClass} onClick={toggleMenu}>
+              <a
+                href="#home"
+                onClick={(e) => {
+                  e.preventDefault();
+                  scrollToSection("home");
+                  toggleMenu();
+                }}
+                className={linkClass("home")}
+              >
                 Home
-              </NavLink>
+              </a>
             </li>
             <li>
-              <NavLink to="/about" className={linkClass} onClick={toggleMenu}>
+              <a
+                href="#about"
+                onClick={(e) => {
+                  e.preventDefault();
+                  scrollToSection("about");
+                  toggleMenu();
+                }}
+                className={linkClass("about")}
+              >
                 About
-              </NavLink>
+              </a>
             </li>
             <li>
-              <NavLink
-                to="/services"
-                className={linkClass}
-                onClick={toggleMenu}
+              <a
+                href="#services"
+                onClick={(e) => {
+                  e.preventDefault();
+                  scrollToSection("services");
+                  toggleMenu();
+                }}
+                className={linkClass("services")}
               >
                 Services
-              </NavLink>
+              </a>
             </li>
             <li>
-              <NavLink to="/contact" className={linkClass} onClick={toggleMenu}>
+              <a
+                href="#contact"
+                onClick={(e) => {
+                  e.preventDefault();
+                  scrollToSection("contact");
+                  toggleMenu();
+                }}
+                className={linkClass("contact")}
+              >
                 Contact
-              </NavLink>
+              </a>
             </li>
           </ul>
         </div>
