@@ -13,7 +13,7 @@ function Hero() {
             We Handle Transport and Logistics, So You Can Focus on Your Business
           </p>
           <div className="flex justify-center md:justify-start">
-            <Button label="Get Started" />
+            <Button label="Track Shipment" />
           </div>
         </div>
 

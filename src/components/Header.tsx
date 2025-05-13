@@ -10,7 +10,7 @@ const Navbar = () => {
     `hover:underline ${isActive ? "text-yellow-400 font-semibold" : ""}`;
 
   return (
-    <nav className="bg-black text-white sticky top-0 z-10 p-5">
+    <nav className="bg-black text-white sticky top-0 z-99 p-5">
       <div className="max-w-7xl mx-auto">
         <div className="flex justify-between items-center">
           <NavLink to="/" className="text-xl font-bold">
