@@ -1,58 +1,77 @@
 import { useState } from "react";
 import { FiMenu, FiX } from "react-icons/fi";
+import { NavLink } from "react-router-dom";
 
 const Navbar = () => {
   const [isOpen, setIsOpen] = useState(false);
   const toggleMenu = () => setIsOpen(!isOpen);
 
+  const linkClass = ({ isActive }: { isActive: boolean }) =>
+    `hover:underline ${isActive ? "text-yellow-400 font-semibold" : ""}`;
+
   return (
     <nav className="bg-black text-white sticky top-0 z-10 p-5">
       <div className="max-w-7xl mx-auto">
         <div className="flex justify-between items-center">
-          <a href="/" className="text-xl font-bold">
+          <NavLink to="/" className="text-xl font-bold">
             Swiftcargo
-          </a>
+          </NavLink>
+
           <div className="md:hidden">
             <button onClick={toggleMenu} className="focus:outline-none">
               {isOpen ? <FiX size={24} /> : <FiMenu size={24} />}
             </button>
           </div>
-          <ul className="hidden md:flex space-x-6">
+
+          <ul className="hidden md:flex space-x-6 text-base">
             <li>
-              <a href="/home">Home</a>
+              <NavLink to="/home" className={linkClass}>
+                Home
+              </NavLink>
             </li>
             <li>
-              <a href="/about">About</a>
+              <NavLink to="/about" className={linkClass}>
+                About
+              </NavLink>
             </li>
             <li>
-              <a href="/services">Services</a>
+              <NavLink to="/services" className={linkClass}>
+                Services
+              </NavLink>
             </li>
             <li>
-              <a href="/contact">Contact</a>
+              <NavLink to="/contact" className={linkClass}>
+                Contact
+              </NavLink>
             </li>
           </ul>
         </div>
+
         <div className={`${isOpen ? "block" : "hidden"} md:hidden mt-4`}>
-          <ul className="flex flex-col space-y-4">
+          <ul className="flex flex-col space-y-4 text-base">
             <li>
-              <a href="/home" onClick={toggleMenu}>
+              <NavLink to="/home" className={linkClass} onClick={toggleMenu}>
                 Home
-              </a>
+              </NavLink>
             </li>
             <li>
-              <a href="/about" onClick={toggleMenu}>
+              <NavLink to="/about" className={linkClass} onClick={toggleMenu}>
                 About
-              </a>
+              </NavLink>
             </li>
             <li>
-              <a href="/services" onClick={toggleMenu}>
+              <NavLink
+                to="/services"
+                className={linkClass}
+                onClick={toggleMenu}
+              >
                 Services
-              </a>
+              </NavLink>
             </li>
             <li>
-              <a href="/contact" onClick={toggleMenu}>
+              <NavLink to="/contact" className={linkClass} onClick={toggleMenu}>
                 Contact
-              </a>
+              </NavLink>
             </li>
           </ul>
         </div>
