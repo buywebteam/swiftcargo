@@ -1,4 +1,4 @@
-import { FaFacebook, FaTwitter, FaLinkedin, FaInstagram } from "react-icons/fa";
+import { FaFacebook, FaTwitter, FaLinkedin } from "react-icons/fa";
 
 const Footer = () => {
   return (
@@ -33,29 +33,14 @@ const Footer = () => {
 
           {/* Social Media Icons */}
           <div className="flex space-x-6 mt-6 sm:mt-0">
-            <a
-              href="https://facebook.com"
-              className="text-2xl hover:text-blue-600"
-            >
+            <a href="/" className="text-2xl hover:text-blue-600">
               <FaFacebook />
             </a>
-            <a
-              href="https://twitter.com"
-              className="text-2xl hover:text-blue-400"
-            >
+            <a href="/" className="text-2xl hover:text-blue-400">
               <FaTwitter />
             </a>
-            <a
-              href="https://linkedin.com"
-              className="text-2xl hover:text-blue-700"
-            >
+            <a href="/" className="text-2xl hover:text-blue-700">
               <FaLinkedin />
-            </a>
-            <a
-              href="https://instagram.com"
-              className="text-2xl hover:text-pink-600"
-            >
-              <FaInstagram />
             </a>
           </div>
         </div>

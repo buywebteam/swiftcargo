@@ -1,7 +1,7 @@
 function ContactSection() {
   return (
     <section
-      className="bg-gradient-to-br from-white to-gray-100 py-16 px-4"
+      className="bg-gradient-to-br from-white to-gray-100 py-30 px-4 scroll-mt-20"
       id="contact"
     >
       <div className="max-w-7xl mx-auto">
@@ -48,7 +48,7 @@ function ContactSection() {
             </div>
             <button
               type="submit"
-              className="bg-customPurple text-white font-semibold px-6 py-3 rounded-md hover:bg-purple-900 transition"
+              className="bg-black text-white font-semibold px-6 py-3 rounded-md"
             >
               Send Message
             </button>
@@ -57,20 +57,12 @@ function ContactSection() {
           {/* Contact Info */}
           <div className="flex flex-col justify-center text-center md:text-left space-y-6">
             <div>
-              <h3 className="text-xl font-semibold mb-2">Email</h3>
-              <p className="text-gray-600">support@swiftcargo.com</p>
-            </div>
-            <div>
               <h3 className="text-xl font-semibold mb-2">Whatsapp</h3>
               <p className="text-gray-600">+1 (234) 567-8901</p>
             </div>
             <div>
               <h3 className="text-xl font-semibold mb-2">Address</h3>
-              <p className="text-gray-600">
-                123 Cargo Avenue, Suite 456
-                <br />
-                Lagos, Nigeria
-              </p>
+              <p className="text-gray-600">12/A, Lanka City, Vaska, NZ. </p>
             </div>
             <div>
               <h3 className="text-xl font-semibold mb-2">Business Hours</h3>

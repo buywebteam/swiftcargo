@@ -12,7 +12,7 @@ import WhyChooseUs from "./WhyChooseUs";
 
 function Home() {
   return (
-    <div id="home">
+    <div id="home" className="scroll-mt-20">
       <Hero />
       <WhyChooseUs />
       <Services />
