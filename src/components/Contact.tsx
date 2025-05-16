@@ -1,4 +1,44 @@
+import { useState } from "react";
+import { db } from "../firebaseConfig/firebase";
+import { collection, addDoc, Timestamp } from "firebase/firestore";
+import { toast, ToastContainer } from "react-toastify";
+import "react-toastify/dist/ReactToastify.css";
+
 function ContactSection() {
+  const [formData, setFormData] = useState({
+    name: "",
+    email: "",
+    message: "",
+  });
+  const [loading, setLoading] = useState(false);
+  const [success, setSuccess] = useState(false);
+
+  const handleChange = (
+    e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>
+  ) => {
+    setFormData((prev) => ({ ...prev, [e.target.name]: e.target.value }));
+  };
+
+  const handleSubmit = async (e: React.FormEvent) => {
+    e.preventDefault();
+    setLoading(true);
+
+    try {
+      await addDoc(collection(db, "contacts"), {
+        ...formData,
+        createdAt: Timestamp.now(),
+      });
+      setSuccess(true);
+      setFormData({ name: "", email: "", message: "" });
+      toast.success("Message sent successfully!");
+    } catch (err) {
+      console.error("Error sending message:", err);
+      toast.error("Failed to send the message. Please try again.");
+    }
+
+    setLoading(false);
+  };
+
   return (
     <section
       className="bg-gradient-to-br from-white to-gray-100 py-30 px-4 scroll-mt-20"
@@ -9,21 +49,28 @@ function ContactSection() {
           Contact Us
         </h2>
         <p className="text-gray-600 text-center mb-12 max-w-2xl mx-auto text-lg">
-          Have a question or want to get a quote? Our team is here to help. Fill
-          out the form or reach out directly via phone or email.
+          Have a question or want to get a quote? Fill out the form or reach out
+          directly via Whatsapp.
         </p>
 
         <div className="grid grid-cols-1 md:grid-cols-2 gap-12">
           {/* Contact Form */}
-          <form className="bg-white shadow-md rounded-lg p-8 space-y-6">
+          <form
+            onSubmit={handleSubmit}
+            className="bg-white shadow-md rounded-lg p-8 space-y-6"
+          >
             <div>
               <label className="block text-gray-700 font-medium mb-2">
                 Name
               </label>
               <input
+                name="name"
+                value={formData.name}
+                onChange={handleChange}
                 type="text"
                 placeholder="Your full name"
                 className="w-full border border-gray-300 rounded-md px-4 py-2 focus:outline-none focus:ring-2 focus:ring-customPurple"
+                required
               />
             </div>
             <div>
@@ -31,9 +78,13 @@ function ContactSection() {
                 Email
               </label>
               <input
+                name="email"
+                value={formData.email}
+                onChange={handleChange}
                 type="email"
                 placeholder="you@example.com"
                 className="w-full border border-gray-300 rounded-md px-4 py-2 focus:outline-none focus:ring-2 focus:ring-customPurple"
+                required
               />
             </div>
             <div>
@@ -41,17 +92,27 @@ function ContactSection() {
                 Message
               </label>
               <textarea
+                name="message"
+                value={formData.message}
+                onChange={handleChange}
                 rows={5}
                 placeholder="Your message..."
                 className="w-full border border-gray-300 rounded-md px-4 py-2 focus:outline-none focus:ring-2 focus:ring-customPurple"
+                required
               />
             </div>
             <button
               type="submit"
-              className="bg-black text-white font-semibold px-6 py-3 rounded-md"
+              className="bg-black text-white font-semibold px-6 py-3 rounded-md cursor-pointer"
+              disabled={loading}
             >
-              Send Message
+              {loading ? "Sending..." : "Send Message"}
             </button>
+            {success && (
+              <p className="text-green-600 font-medium">
+                Message sent successfully!
+              </p>
+            )}
           </form>
 
           {/* Contact Info */}
@@ -62,7 +123,7 @@ function ContactSection() {
             </div>
             <div>
               <h3 className="text-xl font-semibold mb-2">Address</h3>
-              <p className="text-gray-600">12/A, Lanka City, Vaska, NZ. </p>
+              <p className="text-gray-600">12/A, Lanka City, Vaska, NZ.</p>
             </div>
             <div>
               <h3 className="text-xl font-semibold mb-2">Business Hours</h3>
@@ -71,6 +132,7 @@ function ContactSection() {
           </div>
         </div>
       </div>
+      <ToastContainer position="top-right" autoClose={3000} hideProgressBar />
     </section>
   );
 }
