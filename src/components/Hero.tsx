@@ -1,3 +1,4 @@
+import { Link } from "react-router-dom";
 import Button from "./Button";
 
 function Hero() {
@@ -13,11 +14,9 @@ function Hero() {
             We Handle Transport and Logistics, So You Can Focus on Your Business
           </p>
           <div className="flex justify-center md:justify-start">
-            <a
-              href="https://wa.me/1234567890" // Replace with your WhatsApp number
-            >
+            <Link to="/signup" className="cursor-pointer">
               <Button label="Get Started" />
-            </a>
+            </Link>
           </div>
         </div>
 

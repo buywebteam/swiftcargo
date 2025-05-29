@@ -2,6 +2,7 @@ import About from "./About";
 import Contact from "./Contact";
 import FAQ from "./FAQ";
 import Footer from "./Footer";
+import Header from "./Header";
 import Hero from "./Hero";
 import HowItWorks from "./HowItWorks";
 import Newsletter from "./Newsletter";
@@ -13,6 +14,7 @@ import WhyChooseUs from "./WhyChooseUs";
 function Home() {
   return (
     <div id="home" className="scroll-mt-20">
+      <Header />
       <Hero />
       <WhyChooseUs />
       <Services />
