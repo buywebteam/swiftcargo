@@ -1,14 +1,31 @@
 import { useState } from "react";
 import { Menu, X } from "lucide-react";
 
-const Sidebar = ({ onSelect }: { onSelect: (page: string) => void }) => {
+const Sidebar = ({
+  onSelect,
+  activePage,
+}: {
+  onSelect: (page: string) => void;
+  activePage: string;
+}) => {
   const [isOpen, setIsOpen] = useState(false);
+
   const toggleSidebar = () => setIsOpen(!isOpen);
+
+  const handleSelect = (page: string) => {
+    onSelect(page);
+    setIsOpen(false);
+  };
+
+  const navItems = [
+    { label: "Create Shipment", value: "create" },
+    { label: "Track Shipment", value: "track" },
+  ];
 
   return (
     <>
-      {/* Fixed Mobile Navbar */}
-      <div className="md:hidden fixed top-0 left-0 right-0 z-30 flex items-center p-4 bg-black text-white">
+      {/* Mobile Navbar */}
+      <div className="md:hidden fixed lg:fixed top-0 left-0 right-0 z-30 flex items-center p-4 bg-black text-white cursor-pointer">
         <button onClick={toggleSidebar}>
           {isOpen ? <X size={24} /> : <Menu size={24} />}
         </button>
@@ -19,38 +36,49 @@ const Sidebar = ({ onSelect }: { onSelect: (page: string) => void }) => {
       <div
         className={`${
           isOpen ? "block" : "hidden"
-        } md:block w-64 bg-black text-white min-h-screen p-6 fixed left-0 right-0 md:static z-20 top-0`}
+        } md:flex flex-col justify-between w-64 bg-black text-white min-h-screen p-6 fixed left-0 right-0 md:static z-20 top-0 cursor-pointer`}
       >
-        <div className="flex flex-col items-center sm:pt-10 pt-16">
-          <img
-            src="/hero.png"
-            alt="User Profile"
-            className="w-24 h-24 rounded-full border-2"
-          />
-          <h2 className="mt-3 font-bold text-xl">John Doe</h2>
-          <p className="text-base">johndoe@gmail.com</p>
+        <div>
+          {/* Profile */}
+          <div className="flex flex-col items-center sm:pt-10 pt-16">
+            <div className="w-24 h-24 rounded-full border-4 flex items-center justify-center bg-black text-white">
+              <h1 className="text-3xl font-bold">J</h1>
+            </div>
+            <h2 className="mt-3 font-bold text-xl">John Doe</h2>
+            <p className="text-base">johndoe@gmail.com</p>
+          </div>
+
+          {/* Navigation */}
+          <nav className="pt-12 space-y-4">
+            {navItems.map((item) => (
+              <button
+                key={item.value}
+                onClick={() => handleSelect(item.value)}
+                className={`block w-full text-left p-3 rounded cursor-pointer ${
+                  activePage === item.value
+                    ? "bg-white text-black font-semibold"
+                    : "hover:bg-white hover:text-black"
+                }`}
+              >
+                {item.label}
+              </button>
+            ))}
+          </nav>
         </div>
 
-        <nav className="mt-10 space-y-4">
+        {/* Logout Button at Bottom */}
+        <div className="pt-6">
           <button
-            onClick={() => onSelect("create")}
-            className="block w-full text-left hover:bg-white hover:text-black p-3"
-          >
-            Create Shipment
-          </button>
-          <button
-            onClick={() => onSelect("track")}
-            className="block w-full text-left hover:bg-white hover:text-black p-3"
-          >
-            Track Shipment
-          </button>
-          <button
-            onClick={() => onSelect("logout")}
-            className="block w-full text-left hover:bg-white hover:text-black p-3"
+            onClick={() => handleSelect("logout")}
+            className={`block w-full text-left p-3 rounded cursor-pointer ${
+              activePage === "logout"
+                ? "bg-white text-black font-semibold"
+                : "hover:bg-white hover:text-black"
+            }`}
           >
             Logout
           </button>
-        </nav>
+        </div>
       </div>
     </>
   );
