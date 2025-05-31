@@ -1,4 +1,4 @@
-import ShipmentStats from "./ShipmentStats";
+// import ShipmentStats from "./ShipmentStats";
 import RecentShipments from "./RecentShipments";
 import Button from "./Button";
 import ShipmentModal from "./Modal";
@@ -21,7 +21,7 @@ function CreateShipment() {
         <Button label="Create Shipment" onClick={openModal} />
       </div>
 
-      <ShipmentStats />
+      {/* <ShipmentStats /> */}
       <RecentShipments />
       <ShipmentModal isOpen={isModalOpen} onClose={closeModal} />
     </div>

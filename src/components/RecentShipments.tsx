@@ -1,8 +1,17 @@
-import { useEffect } from "react";
+import { useEffect, useState } from "react";
 import { useShipment } from "../context/ShipmentContext"; // Update this import path
+import { FiCopy, FiCheck } from "react-icons/fi";
 
 const RecentShipmentsTable = () => {
   const { shipments, getShipments, loading, error } = useShipment();
+  const [copiedId, setCopiedId] = useState<string | null>(null);
+
+  const handleCopy = (id: string) => {
+    navigator.clipboard.writeText(id).then(() => {
+      setCopiedId(id);
+      setTimeout(() => setCopiedId(null), 2000); // reset after 2 seconds
+    });
+  };
 
   useEffect(() => {
     if (shipments.length === 0) {
@@ -59,12 +68,12 @@ const RecentShipmentsTable = () => {
         <table className="w-full border-collapse bg-white shadow rounded-lg">
           <thead className="hidden sm:table-header-group">
             <tr className="bg-gray-200 text-left text-xs sm:text-sm text-gray-600">
-              <th className="p-3 sm:p-3">Receiver Name</th>
-              <th className="p-3 sm:p-3">Receiver Address</th>
-              <th className="p-3 sm:p-3">Package</th>
-              <th className="p-3 sm:p-3">Weight</th>
-              <th className="p-3 sm:p-3">Mode of Carrier</th>
-              <th className="p-3 sm:p-3">Tracking ID</th>
+              <th className="p-3 sm:p-4">Receiver Name</th>
+              <th className="p-3 sm:p-4">Receiver Address</th>
+              <th className="p-3 sm:p-4">Package</th>
+              <th className="p-3 sm:p-4">Weight</th>
+              <th className="p-3 sm:p-4">Mode of Carrier</th>
+              <th className="p-3 sm:p-4">Tracking ID</th>
             </tr>
           </thead>
           <tbody>
@@ -95,9 +104,29 @@ const RecentShipmentsTable = () => {
                   {item.carrierMode}
                 </td>
 
-                <td className="block sm:table-cell p-3 sm:p-3">
-                  <span className="font-semibold sm:hidden">Tracking ID: </span>
-                  {item.id}
+                <td className="block sm:table-cell p-3 sm:p-3 cursor-pointer select-none">
+                  <div className="flex items-center gap-2">
+                    <span>
+                      <span className="font-semibold sm:hidden">
+                        Tracking ID:{" "}
+                      </span>
+                      {item.id}
+                    </span>
+                    {copiedId === item.id ? (
+                      <FiCheck
+                        className="text-green-600"
+                        size={18}
+                        title="Copied"
+                      />
+                    ) : (
+                      <FiCopy
+                        className="text-gray-500 hover:text-gray-800"
+                        size={18}
+                        onClick={() => item.id && handleCopy(item.id)}
+                        title="Copy tracking ID"
+                      />
+                    )}
+                  </div>
                 </td>
               </tr>
             ))}

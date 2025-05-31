@@ -4,6 +4,7 @@ import { useAuth } from "../context/AuthContext";
 type LogoutModalProps = {
   isOpen: boolean;
   onCancel: () => void;
+  onConfirm: () => void;
 };
 
 const LogoutModal: React.FC<LogoutModalProps> = ({ isOpen, onCancel }) => {
@@ -14,6 +15,8 @@ const LogoutModal: React.FC<LogoutModalProps> = ({ isOpen, onCancel }) => {
 
   const handleLogout = () => {
     logout();
+    sessionStorage.clear();
+
     navigate("/home");
   };
 

@@ -58,6 +58,7 @@ const ShipmentModal: React.FC<ShipmentModalProps> = ({ isOpen, onClose }) => {
     const shipmentData: ShipmentData = {
       ...formData,
       weight: Number(formData.weight),
+      status: "Pending", // or another default status as required by your app
     };
 
     await createShipment(shipmentData);
