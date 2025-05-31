@@ -56,8 +56,6 @@ export const AuthProvider = ({ children }: { children: ReactNode }) => {
       email: user.email,
       createdAt: new Date(),
     });
-
-    // No need to return user; function should return void
   };
 
   const login = async (email: string, password: string) => {
