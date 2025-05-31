@@ -49,8 +49,7 @@ function ContactSection() {
           Contact Us
         </h2>
         <p className="text-gray-600 text-center mb-12 max-w-2xl mx-auto text-lg">
-          Have a question or want to get a quote? Fill out the form or reach out
-          directly via Whatsapp.
+          Have a question? Fill out the form or reach out directly via Telegram.
         </p>
 
         <div className="grid grid-cols-1 md:grid-cols-2 gap-12">
@@ -117,10 +116,6 @@ function ContactSection() {
 
           {/* Contact Info */}
           <div className="flex flex-col justify-center text-center md:text-left space-y-6">
-            <div>
-              <h3 className="text-xl font-semibold mb-2">Whatsapp</h3>
-              <p className="text-gray-600">+1 (234) 567-8901</p>
-            </div>
             <div>
               <h3 className="text-xl font-semibold mb-2">Address</h3>
               <p className="text-gray-600">12/A, Lanka City, Vaska, NZ.</p>
