@@ -80,7 +80,7 @@ const ShipmentModal: React.FC<ShipmentModalProps> = ({ isOpen, onClose }) => {
         </h2>
         <form
           onSubmit={handleSubmit}
-          className="grid grid-cols-1 md:grid-cols-2 gap-4 gap-x-4"
+          className="grid grid-cols-2 md:grid-cols-2 gap-6 gap-x-4"
         >
           <div>
             <label htmlFor="shipperName" className="block mb-1 font-medium">
@@ -266,18 +266,18 @@ const ShipmentModal: React.FC<ShipmentModalProps> = ({ isOpen, onClose }) => {
           </div>
 
           {/* Full-width button row */}
-          <div className="col-span-1 md:col-span-2 flex justify-end gap-4 mt-4">
+          <div className="col-span-1 md:col-span-2 flex justify-end gap-2 mt-4">
             <button
               type="button"
               onClick={onClose}
-              className="px-4 py-2 rounded bg-gray-300 hover:bg-gray-400 cursor-pointer"
+              className="px-3 py-1 rounded bg-gray-300 hover:bg-gray-400 cursor-pointer text-sm"
               disabled={loading}
             >
               Cancel
             </button>
             <button
               type="submit"
-              className="px-4 py-2 rounded bg-black text-white cursor-pointer"
+              className="px-3 py-1 rounded bg-black text-white cursor-pointer text-sm"
               disabled={loading}
             >
               Submit
