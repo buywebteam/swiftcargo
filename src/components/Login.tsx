@@ -1,6 +1,6 @@
 import { useForm } from "react-hook-form";
 import { useAuth } from "../context/AuthContext"; // adjust the path as needed
-import { useNavigate } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import { useState } from "react";
 import { toast, ToastContainer } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
@@ -111,12 +111,12 @@ const Login = () => {
 
         <p className="text-sm text-center text-gray-600 mt-4">
           Don't have an account?{" "}
-          <a
-            href="/signup"
+          <Link
+            to="/signup"
             className="text-teal-500 hover:underline font-medium cursor-pointer"
           >
             Sign Up
-          </a>
+          </Link>
         </p>
 
         <p className="text-xs text-center text-gray-400 mt-6">
