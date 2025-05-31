@@ -39,7 +39,7 @@ const Button: React.FC<ButtonProps> = ({
 
   return (
     <button
-      className={`py-2 px-4 rounded-md flex items-center justify-center ${width} ${bgColor} ${border}`}
+      className={`py-2 px-4 rounded-md flex items-center justify-center cursor-pointer ${width} ${bgColor} ${border}`}
       onClick={!disabled ? onClick : undefined}
       disabled={disabled}
     >

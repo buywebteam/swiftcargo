@@ -1,11 +1,54 @@
+import { useForm } from "react-hook-form";
+import { useAuth } from "../context/AuthContext"; // adjust the path as needed
+import { useNavigate } from "react-router-dom";
+import { useState } from "react";
+import { toast, ToastContainer } from "react-toastify";
+import "react-toastify/dist/ReactToastify.css";
+
+interface LoginFormInputs {
+  email: string;
+  password: string;
+}
+
 const Login = () => {
+  const { login } = useAuth();
+  const navigate = useNavigate();
+  const [error, setError] = useState("");
+  const {
+    register,
+    handleSubmit,
+    formState: { errors },
+  } = useForm<LoginFormInputs>();
+
+  const onSubmit = async (data: LoginFormInputs) => {
+    try {
+      await login(data.email, data.password);
+      toast.success("Login successful! Redirecting to dashboard...");
+      navigate("/dashboard"); // Change to your protected route
+    } catch (err: unknown) {
+      toast.error("Login failed. Please try again.");
+
+      if (err instanceof Error) {
+        console.error("Login error:", err.message);
+      } else {
+        console.error("Login error:", err);
+      }
+      setError("Invalid email or password");
+    }
+  };
+
   return (
     <div className="min-h-screen flex items-center justify-center p-4">
+      <ToastContainer position="top-right" autoClose={3000} hideProgressBar />
+
       <div className="bg-white rounded-lg shadow-lg w-full max-w-md p-8">
         <h2 className="text-2xl font-bold text-center mb-6 text-gray-800">
           Login
         </h2>
-        <form className="space-y-4">
+
+        <form onSubmit={handleSubmit(onSubmit)} className="space-y-4">
+          {error && <p className="text-sm text-red-600 text-center">{error}</p>}
+
           <div>
             <label
               htmlFor="email"
@@ -16,10 +59,15 @@ const Login = () => {
             <input
               type="text"
               id="email"
+              placeholder="Enter your email"
               className="w-full p-2 border border-gray-300 rounded mt-1"
-              placeholder="Enter your username or email"
-              required
+              {...register("email", { required: "Email is required" })}
             />
+            {errors.email && (
+              <p className="text-xs text-red-600 mt-1">
+                {errors.email.message}
+              </p>
+            )}
           </div>
 
           <div>
@@ -32,10 +80,15 @@ const Login = () => {
             <input
               type="password"
               id="password"
-              className="w-full p-2 border border-gray-300 rounded mt-1"
               placeholder="Enter your password"
-              required
+              className="w-full p-2 border border-gray-300 rounded mt-1"
+              {...register("password", { required: "Password is required" })}
             />
+            {errors.password && (
+              <p className="text-xs text-red-600 mt-1">
+                {errors.password.message}
+              </p>
+            )}
           </div>
 
           <div className="flex items-center justify-between text-sm text-gray-600">

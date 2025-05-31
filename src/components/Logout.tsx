@@ -1,15 +1,21 @@
+import { useNavigate } from "react-router-dom";
+import { useAuth } from "../context/AuthContext";
+
 type LogoutModalProps = {
   isOpen: boolean;
-  onConfirm: () => void;
   onCancel: () => void;
 };
 
-const LogoutModal: React.FC<LogoutModalProps> = ({
-  isOpen,
-  onConfirm,
-  onCancel,
-}) => {
+const LogoutModal: React.FC<LogoutModalProps> = ({ isOpen, onCancel }) => {
+  const { logout } = useAuth();
+  const navigate = useNavigate();
+
   if (!isOpen) return null;
+
+  const handleLogout = () => {
+    logout();
+    navigate("/home");
+  };
 
   return (
     <div className="fixed inset-0 flex items-center justify-center bg-black bg-opacity-50 z-50">
@@ -24,7 +30,7 @@ const LogoutModal: React.FC<LogoutModalProps> = ({
             Cancel
           </button>
           <button
-            onClick={onConfirm}
+            onClick={handleLogout}
             className="px-4 py-2 rounded bg-red-600 text-white hover:bg-red-700"
           >
             Logout

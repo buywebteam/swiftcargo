@@ -1,5 +1,6 @@
 import { useState } from "react";
 import { Menu, X } from "lucide-react";
+import { useAuth } from "../context/AuthContext";
 
 const Sidebar = ({
   onSelect,
@@ -8,6 +9,7 @@ const Sidebar = ({
   onSelect: (page: string) => void;
   activePage: string;
 }) => {
+  const { currentUser } = useAuth();
   const [isOpen, setIsOpen] = useState(false);
 
   const toggleSidebar = () => setIsOpen(!isOpen);
@@ -21,6 +23,10 @@ const Sidebar = ({
     { label: "Create Shipment", value: "create" },
     { label: "Track Shipment", value: "track" },
   ];
+  // Safely get displayName and email, or fallback
+  const displayName = currentUser?.displayName || "User";
+  const email = currentUser?.email || "user@example.com";
+  const profileLetter = displayName.charAt(0).toUpperCase();
 
   return (
     <>
@@ -41,11 +47,11 @@ const Sidebar = ({
         <div>
           {/* Profile */}
           <div className="flex flex-col items-center sm:pt-10 pt-16">
-            <div className="w-24 h-24 rounded-full border-4 flex items-center justify-center bg-black text-white">
-              <h1 className="text-3xl font-bold">J</h1>
+            <div className="w-24 h-24 rounded-full  flex items-center justify-center bg-white text-black">
+              <h1 className="text-5xl font-bold">{profileLetter}</h1>
             </div>
-            <h2 className="mt-3 font-bold text-xl">John Doe</h2>
-            <p className="text-base">johndoe@gmail.com</p>
+            <h2 className="mt-3 font-bold text-xl">{displayName}</h2>
+            <p className="text-base">{email}</p>
           </div>
 
           {/* Navigation */}
