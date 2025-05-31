@@ -1,25 +1,54 @@
-const shipments = [
-  {
-    id: 1,
-    recipient: "John Doe",
-    address: "123 Maple Street",
-    weight: "2kg",
-    date: "2025-05-29",
-    trackingid: "TRK123456789",
-    status: "Delivered",
-  },
-  {
-    id: 2,
-    recipient: "Jane Smith",
-    address: "456 Oak Avenue",
-    weight: "3.5kg",
-    date: "2025-05-28",
-    trackingid: "TRK987654321",
-    status: "In Transit",
-  },
-];
+import { useEffect } from "react";
+import { useShipment } from "../context/ShipmentContext"; // Update this import path
 
 const RecentShipmentsTable = () => {
+  const { shipments, getShipments, loading, error } = useShipment();
+
+  useEffect(() => {
+    if (shipments.length === 0) {
+      getShipments();
+    }
+  }, [getShipments, shipments.length]);
+
+  if (loading) {
+    return (
+      <div className="mt-10 w-full">
+        <h2 className="text-lg sm:text-xl font-semibold mb-4">
+          Recent Shipments
+        </h2>
+        <div className="flex justify-center items-center p-8">
+          <div className="text-gray-600">Loading shipments...</div>
+        </div>
+      </div>
+    );
+  }
+
+  if (error) {
+    return (
+      <div className="mt-10 w-full">
+        <h2 className="text-lg sm:text-xl font-semibold mb-4">
+          Recent Shipments
+        </h2>
+        <div className="bg-red-50 border border-red-200 rounded-lg p-4">
+          <div className="text-red-600">Error: {error}</div>
+        </div>
+      </div>
+    );
+  }
+
+  if (shipments.length === 0) {
+    return (
+      <div className="mt-10 w-full">
+        <h2 className="text-lg sm:text-xl font-semibold mb-4">
+          Recent Shipments
+        </h2>
+        <div className="bg-gray-50 border border-gray-200 rounded-lg p-8 text-center">
+          <div className="text-gray-600">No shipments found</div>
+        </div>
+      </div>
+    );
+  }
+
   return (
     <div className="mt-10 w-full">
       <h2 className="text-lg sm:text-xl font-semibold mb-4">
@@ -30,12 +59,12 @@ const RecentShipmentsTable = () => {
         <table className="w-full border-collapse bg-white shadow rounded-lg">
           <thead className="hidden sm:table-header-group">
             <tr className="bg-gray-200 text-left text-xs sm:text-sm text-gray-600">
-              <th className="p-3 sm:p-3">Recipient</th>
-              <th className="p-3 sm:p-3">Address</th>
+              <th className="p-3 sm:p-3">Receiver Name</th>
+              <th className="p-3 sm:p-3">Receiver Address</th>
+              <th className="p-3 sm:p-3">Package</th>
               <th className="p-3 sm:p-3">Weight</th>
-              <th className="p-3 sm:p-3">Date</th>
+              <th className="p-3 sm:p-3">Mode of Carrier</th>
               <th className="p-3 sm:p-3">Tracking ID</th>
-              <th className="p-3 sm:p-3">Status</th>
             </tr>
           </thead>
           <tbody>
@@ -46,34 +75,29 @@ const RecentShipmentsTable = () => {
               >
                 {/* Mobile layout: each cell becomes a block with label */}
                 <td className="block sm:table-cell p-3 sm:p-3">
-                  <span className="font-semibold sm:hidden">Recipient: </span>
-                  {item.recipient}
+                  <span className="font-semibold sm:hidden">Receiver: </span>
+                  {item.receiverName}
                 </td>
                 <td className="block sm:table-cell p-3 sm:p-3">
                   <span className="font-semibold sm:hidden">Address: </span>
-                  {item.address}
+                  {item.receiverAddress}
                 </td>
                 <td className="block sm:table-cell p-3 sm:p-3">
                   <span className="font-semibold sm:hidden">Weight: </span>
-                  {item.weight}
+                  {item.package}
                 </td>
                 <td className="block sm:table-cell p-3 sm:p-3">
-                  <span className="font-semibold sm:hidden">Date: </span>
-                  {item.date}
+                  <span className="font-semibold sm:hidden">Weight: </span>
+                  {item.weight}kg
                 </td>
+                <td className="block sm:table-cell p-3 sm:p-3">
+                  <span className="font-semibold sm:hidden">Weight: </span>
+                  {item.carrierMode}
+                </td>
+
                 <td className="block sm:table-cell p-3 sm:p-3">
                   <span className="font-semibold sm:hidden">Tracking ID: </span>
-                  {item.trackingid}
-                </td>
-                <td
-                  className={`block sm:table-cell p-3 sm:p-3 font-semibold ${
-                    item.status === "Delivered"
-                      ? "text-green-600"
-                      : "text-yellow-600"
-                  }`}
-                >
-                  <span className="font-semibold sm:hidden">Status: </span>
-                  {item.status}
+                  {item.id}
                 </td>
               </tr>
             ))}
