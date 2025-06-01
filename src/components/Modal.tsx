@@ -214,7 +214,7 @@ const ShipmentModal: React.FC<ShipmentModalProps> = ({ isOpen, onClose }) => {
             >
               <option value="">Select Carrier</option>
               <option value="DHL">DHL</option>
-              <option value="FedEX">FedEX</option>
+              <option value="FedEX">FedEx</option>
               <option value="USPS">USPS</option>
             </select>
           </div>
