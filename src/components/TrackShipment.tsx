@@ -111,6 +111,12 @@ function TrackShipment() {
             >
               <span className="text-lg font-bold">{shipmentData.status}</span>
             </div>
+            {shipmentData.updatedAt && (Add commentMore actions
+              <p className="text-sm text-gray-500 mt-3">
+                Last updated:{" "}
+                {new Date(shipmentData.updatedAt).toLocaleString()}
+              </p>
+            )}
           </div>
 
           <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
