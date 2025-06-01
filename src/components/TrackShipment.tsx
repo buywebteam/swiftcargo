@@ -130,7 +130,7 @@ function TrackShipment() {
               </div>
               <div>
                 <span className="text-sm text-gray-600">Address:</span>
-                <p className="font-medium">{shipmentDta.shipperAddress}</p>
+                <p className="font-medium">{shipmentData.shipperAddress}</p>
               </div>
             </div>
 
