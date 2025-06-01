@@ -84,15 +84,15 @@ const RecentShipmentsTable = () => {
               >
                 {/* Mobile layout: each cell becomes a block with label */}
                 <td className="block sm:table-cell p-3 sm:p-3">
-                  <span className="font-semibold sm:hidden">Receiver: </span>
+                  <span className="font-semibold sm:hidden">Receiver Name: </span>
                   {item.receiverName}
                 </td>
                 <td className="block sm:table-cell p-3 sm:p-3">
-                  <span className="font-semibold sm:hidden">Address: </span>
+                  <span className="font-semibold sm:hidden">Receiver Address: </span>
                   {item.receiverAddress}
                 </td>
                 <td className="block sm:table-cell p-3 sm:p-3">
-                  <span className="font-semibold sm:hidden">Weight: </span>
+                  <span className="font-semibold sm:hidden">Package: </span>
                   {item.package}
                 </td>
                 <td className="block sm:table-cell p-3 sm:p-3">
@@ -100,7 +100,7 @@ const RecentShipmentsTable = () => {
                   {item.weight}kg
                 </td>
                 <td className="block sm:table-cell p-3 sm:p-3">
-                  <span className="font-semibold sm:hidden">Weight: </span>
+                  <span className="font-semibold sm:hidden">Mode of Carrier: </span>
                   {item.carrierMode}
                 </td>
 
