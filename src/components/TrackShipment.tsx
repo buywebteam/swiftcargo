@@ -154,12 +154,28 @@ function TrackShipment() {
                 <p className="font-medium">{shipmentData.weight}kg</p>
               </div>
               <div>
+                <span className="text-sm text-gray-600">Mode of Carrier:</span>
+                <p className="font-medium">{shipmentData.carrierMode}</p>
+              </div>{" "}
+              <div>
+                <span className="text-sm text-gray-600">Mode of Shipment:</span>
+                <p className="font-medium">{shipmentData.shipmentMode}</p>
+              </div>{" "}
+              <div>
+                <span className="text-sm text-gray-600">Type of Shipment:</span>
+                <p className="font-medium">{shipmentData.shipmentType}</p>
+              </div>
+              <div>
                 <span className="text-sm text-gray-600">Pickup Date:</span>
                 <p className="font-medium">{shipmentData.pickupDate}</p>
               </div>
               <div>
                 <span className="text-sm text-gray-600">Delivery Date:</span>
                 <p className="font-medium">{shipmentData.deliveryDate}</p>
+              </div>
+              <div>
+                <span className="text-sm text-gray-600">Shipment Status:</span>
+                <p className="font-medium">{shipmentData.status}</p>
               </div>
             </div>
           </div>

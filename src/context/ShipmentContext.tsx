@@ -17,6 +17,7 @@ import {
   query,
   where,
   serverTimestamp,
+  Timestamp,
 } from "firebase/firestore";
 import { db } from "../../firebaseConfig/firebase";
 import { useAuth } from "./AuthContext";
@@ -181,13 +182,15 @@ export const ShipmentProvider = ({ children }: { children: ReactNode }) => {
 
       const sorted = fetched.sort((a, b) => {
         const dateA =
-          a.createdAt instanceof Date
-            ? a.createdAt
+          a.createdAt instanceof Timestamp
+            ? a.createdAt.toDate()
             : new Date(a.createdAt || 0);
+
         const dateB =
-          b.createdAt instanceof Date
-            ? b.createdAt
+          b.createdAt instanceof Timestamp
+            ? b.createdAt.toDate()
             : new Date(b.createdAt || 0);
+
         return dateB.getTime() - dateA.getTime();
       });
 

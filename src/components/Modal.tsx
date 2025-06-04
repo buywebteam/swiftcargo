@@ -58,12 +58,16 @@ const ShipmentModal: React.FC<ShipmentModalProps> = ({ isOpen, onClose }) => {
     const shipmentData: ShipmentData = {
       ...formData,
       weight: Number(formData.weight),
-      status: "Pending", // or another default status as required by your app
+      status: "Pending",
     };
 
-    await createShipment(shipmentData);
-    toast.success("Shipment created successfully");
-
+    try {
+      await createShipment(shipmentData);
+      toast.success("Shipment created successfully");
+      onClose();
+    } catch {
+      toast.error("Failed to create shipment.");
+    }
     if (!error) {
       onClose();
     }
@@ -224,13 +228,15 @@ const ShipmentModal: React.FC<ShipmentModalProps> = ({ isOpen, onClose }) => {
               Weight (kg)
             </label>
             <input
-              type="text"
+              type="number"
               name="weight"
               id="weight"
               value={formData.weight}
               onChange={handleChange}
               className="border p-2 rounded w-full"
               disabled={loading}
+              step="0.01"
+              min="0"
             />
           </div>
 

@@ -73,6 +73,7 @@ const RecentShipmentsTable = () => {
               <th className="p-3 sm:p-4">Package</th>
               <th className="p-3 sm:p-4">Weight</th>
               <th className="p-3 sm:p-4">Mode of Carrier</th>
+              <th className="p-3 sm:p-4">Date</th>
               <th className="p-3 sm:p-4">Tracking ID</th>
             </tr>
           </thead>
@@ -84,11 +85,15 @@ const RecentShipmentsTable = () => {
               >
                 {/* Mobile layout: each cell becomes a block with label */}
                 <td className="block sm:table-cell p-3 sm:p-3">
-                  <span className="font-semibold sm:hidden">Receiver Name: </span>
+                  <span className="font-semibold sm:hidden">
+                    Receiver Name:{" "}
+                  </span>
                   {item.receiverName}
                 </td>
                 <td className="block sm:table-cell p-3 sm:p-3">
-                  <span className="font-semibold sm:hidden">Receiver Address: </span>
+                  <span className="font-semibold sm:hidden">
+                    Receiver Address:{" "}
+                  </span>
                   {item.receiverAddress}
                 </td>
                 <td className="block sm:table-cell p-3 sm:p-3">
@@ -100,8 +105,35 @@ const RecentShipmentsTable = () => {
                   {item.weight}kg
                 </td>
                 <td className="block sm:table-cell p-3 sm:p-3">
-                  <span className="font-semibold sm:hidden">Mode of Carrier: </span>
+                  <span className="font-semibold sm:hidden">
+                    Mode of Carrier:{" "}
+                  </span>
                   {item.carrierMode}
+                </td>
+                <td className="block sm:table-cell p-3 sm:p-3">
+                  <span className="font-semibold sm:hidden">Date: </span>
+                  {(() => {
+                    if (!item.createdAt) return "";
+                    if (
+                      typeof item.createdAt === "object" &&
+                      item.createdAt !== null &&
+                      typeof (item.createdAt as { toDate?: () => Date })
+                        .toDate === "function"
+                    ) {
+                      return (
+                        item.createdAt as unknown as { toDate: () => Date }
+                      )
+                        .toDate()
+                        .toLocaleDateString();
+                    }
+                    if (item.createdAt instanceof Date) {
+                      return item.createdAt.toLocaleDateString();
+                    }
+                    if (typeof item.createdAt === "string") {
+                      return new Date(item.createdAt).toLocaleDateString();
+                    }
+                    return "";
+                  })()}
                 </td>
 
                 <td className="block sm:table-cell p-3 sm:p-3 cursor-pointer select-none">
