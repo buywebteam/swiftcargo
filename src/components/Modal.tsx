@@ -199,9 +199,9 @@ const ShipmentModal: React.FC<ShipmentModalProps> = ({ isOpen, onClose }) => {
               disabled={loading}
             >
               <option value="">Select Mode</option>
-              <option value="Air">Air</option>
-              <option value="Road">Road</option>
-              <option value="Sea">Sea</option>
+              <option value="Air Freight">Air Freight</option>
+              <option value="Road Freight">Road Freight</option>
+              <option value="Sea Freight">Sea Freight</option>
             </select>
           </div>
           <div>

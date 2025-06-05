@@ -1,5 +1,5 @@
 import { useEffect, useState } from "react";
-import { useShipment } from "../context/ShipmentContext"; // Update this import path
+import { useShipment } from "../context/ShipmentContext";
 import { FiCopy, FiCheck } from "react-icons/fi";
 
 const RecentShipmentsTable = () => {
@@ -9,7 +9,7 @@ const RecentShipmentsTable = () => {
   const handleCopy = (id: string) => {
     navigator.clipboard.writeText(id).then(() => {
       setCopiedId(id);
-      setTimeout(() => setCopiedId(null), 2000); // reset after 2 seconds
+      setTimeout(() => setCopiedId(null), 2000);
     });
   };
 
@@ -74,6 +74,7 @@ const RecentShipmentsTable = () => {
               <th className="p-3 sm:p-4">Weight</th>
               <th className="p-3 sm:p-4">Mode of Carrier</th>
               <th className="p-3 sm:p-4">Date</th>
+              <th className="p-3 sm:p-4">Time</th>
               <th className="p-3 sm:p-4">Tracking ID</th>
             </tr>
           </thead>
@@ -131,6 +132,40 @@ const RecentShipmentsTable = () => {
                     }
                     if (typeof item.createdAt === "string") {
                       return new Date(item.createdAt).toLocaleDateString();
+                    }
+                    return "";
+                  })()}
+                </td>
+                <td className="block sm:table-cell p-3 sm:p-3">
+                  <span className="font-semibold sm:hidden">Time: </span>
+                  {(() => {
+                    if (!item.createdAt) return "";
+                    if (
+                      typeof item.createdAt === "object" &&
+                      item.createdAt !== null &&
+                      typeof (item.createdAt as { toDate?: () => Date })
+                        .toDate === "function"
+                    ) {
+                      return (
+                        item.createdAt as unknown as { toDate: () => Date }
+                      )
+                        .toDate()
+                        .toLocaleTimeString([], {
+                          hour: "2-digit",
+                          minute: "2-digit",
+                        });
+                    }
+                    if (item.createdAt instanceof Date) {
+                      return item.createdAt.toLocaleTimeString([], {
+                        hour: "2-digit",
+                        minute: "2-digit",
+                      });
+                    }
+                    if (typeof item.createdAt === "string") {
+                      return new Date(item.createdAt).toLocaleTimeString([], {
+                        hour: "2-digit",
+                        minute: "2-digit",
+                      });
                     }
                     return "";
                   })()}
