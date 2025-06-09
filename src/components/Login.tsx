@@ -96,14 +96,14 @@ const Login = () => {
               <input type="checkbox" className="mr-2" />
               Remember me
             </label>
-            <a href="/forgotpassword" className="text-teal-500 hover:underline">
+            <a href="#" className="text-teal-500 hover:underline">
               Forgot Password?
             </a>
           </div>
 
           <button
             type="submit"
-            className="w-full bg-black text-white py-2 rounded"
+            className="w-full bg-black text-white py-2 rounded cursor-pointer"
           >
             Login
           </button>
