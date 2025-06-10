@@ -9,8 +9,7 @@ const FAQ = () => {
               How do I track my shipment?
             </h4>
             <p>
-              You can track your shipment using the tracking ID sent to your
-              email after dispatch.
+              You can track your shipment using the tracking ID attached to each created shipment on your profile dashboard.
             </p>
           </div>
           <div>
