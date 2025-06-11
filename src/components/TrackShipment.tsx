@@ -4,6 +4,7 @@ import {
   type ShipmentData,
   type ShipmentStatus,
 } from "../context/ShipmentContext";
+import Spinner from "./Spinner";
 
 function TrackShipment() {
   const { trackShipment, loading, error } = useShipment();
@@ -93,8 +94,10 @@ function TrackShipment() {
       )}
 
       {loading && (
-        <div className="mb-6 p-8 text-center">
-          <div className="text-gray-600">Searching for your shipment...</div>
+        <div className="mb-6 p-8 flex justify-center text-center">
+          <div className="text-gray-600">
+            <Spinner />
+          </div>
         </div>
       )}
 
@@ -175,7 +178,13 @@ function TrackShipment() {
               </div>
               <div>
                 <span className="text-sm text-gray-600">Shipment Status:</span>
-                <p className="font-medium">{shipmentData.status}</p>
+                <p
+                  className={`font-medium inline-block px-2 py-1 border rounded-full ${getStatusColor(
+                    shipmentData.status
+                  )}`}
+                >
+                  {shipmentData.status}
+                </p>{" "}
               </div>
             </div>
           </div>
