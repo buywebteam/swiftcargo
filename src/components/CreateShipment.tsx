@@ -11,7 +11,7 @@ function CreateShipment() {
   const closeModal = () => setIsModalOpen(false);
 
   return (
-    <div className="md:py-10 py-12">
+    <div className="md:py-20 lg:py-12 py-12 lg:ml-64">
       <h1 className="text-3xl font-bold mb-2">Manage Your Shipments</h1>
       <p className="text-gray-600 mb-6">
         Create, track, and manage all your shipments in one place.

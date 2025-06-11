@@ -61,7 +61,7 @@ function TrackShipment() {
   };
 
   return (
-    <div className="max-w-2xl mx-auto mt-10 p-4">
+    <div className="max-w-2xl mx-auto mt-10 lg:mt-12 md:mt-20 p-4">
       <h2 className="text-2xl font-bold mb-6 text-center">
         Track Your Shipment
       </h2>

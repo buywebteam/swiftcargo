@@ -23,31 +23,31 @@ const Sidebar = ({
     { label: "Create Shipment", value: "create" },
     { label: "Track Shipment", value: "track" },
   ];
-  // Safely get displayName and email, or fallback
+
   const displayName = currentUser?.displayName || "User";
   const email = currentUser?.email || "user@example.com";
   const profileLetter = displayName.charAt(0).toUpperCase();
 
   return (
     <>
-      {/* Mobile Navbar */}
-      <div className="md:hidden fixed lg:fixed top-0 left-0 right-0 z-30 flex items-center p-4 bg-black text-white cursor-pointer">
+      {/* Mobile/Tablet Navbar */}
+      <div className="lg:hidden fixed top-0 left-0 right-0 z-30 flex items-center p-4 bg-black text-white cursor-pointer">
         <button onClick={toggleSidebar}>
           {isOpen ? <X size={24} /> : <Menu size={24} />}
         </button>
         <span className="ml-4 text-lg font-semibold">Dashboard</span>
       </div>
 
-      {/* Sidebar */}
+      {/* Sidebar - hidden on mobile/tablet, visible only on desktop (lg) */}
       <div
         className={`${
           isOpen ? "block" : "hidden"
-        } md:flex flex-col justify-between w-64 bg-black text-white min-h-screen p-6 fixed left-0 right-0 md:static z-20 top-0 cursor-pointer`}
+        } lg:flex flex-col justify-between w-64 bg-black text-white min-h-screen p-6 fixed z-20 top-0 left-0 cursor-pointer`}
       >
         <div>
           {/* Profile */}
-          <div className="flex flex-col items-center sm:pt-10 pt-16">
-            <div className="w-24 h-24 rounded-full  flex items-center justify-center bg-white text-black">
+          <div className="flex flex-col items-center pt-16">
+            <div className="w-24 h-24 rounded-full bg-white text-black flex items-center justify-center">
               <h1 className="text-5xl font-bold">{profileLetter}</h1>
             </div>
             <h2 className="mt-3 font-bold text-xl">{displayName}</h2>
@@ -72,7 +72,7 @@ const Sidebar = ({
           </nav>
         </div>
 
-        {/* Logout Button at Bottom */}
+        {/* Logout Button */}
         <div className="pt-6">
           <button
             onClick={() => handleSelect("logout")}
